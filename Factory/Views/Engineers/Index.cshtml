@@ -2,6 +2,8 @@
   Layout = "_Layout";
 }
 
+@using Microsoft.AspNetCore.Mvc.Rendering;
+
 @model Factory.Models.Engineer;
 <h1></h1>
 
@@ -11,14 +13,11 @@
 }
 else
 {
-  <h3>Current Engineers and assigned machinery</h3>
+  <h3>Current Engineer's and</h3>
 <ul>
-  @foreach(var join in Model.JoinEntities)
+  @foreach(var join in @Model.JoinEntities)
   {
-      <li>@Html.ActionLink($"{join.engineer.EngineerName}", "Details", new { id = join.engineer.EngineerId })</li>
-    <ol>
-    <li>@Html.ActionLink($"{join.machine.MachineName}", "Details", new { id = join.machine.MachineId })</li>
-    </ol>
+    <li>@Html.ActionLink($"{join.Engineer.EngineerName}", "Details", new { id = join.Engineer.EngineerId })</li>
   }
 </ul>
 }
