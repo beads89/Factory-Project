@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Factory.Models;
@@ -22,6 +23,7 @@ namespace Factory.Controllers
     }
         public ActionResult Create()
     {
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineDescription");
       return View();
     }
     [HttpPost]
@@ -42,12 +44,15 @@ namespace Factory.Controllers
     public ActionResult Edit(int id)
     {
       var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineDescription");
+
       return View(thisEngineer);
     }
 
     [HttpPost]
     public ActionResult Edit(Engineer engineer)
     {
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineDescription");
       _db.Entry(engineer).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");

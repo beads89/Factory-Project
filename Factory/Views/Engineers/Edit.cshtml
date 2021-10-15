@@ -12,8 +12,11 @@
 {
   @Html.HiddenFor(model => model.EngineerId)
 
-  @Html.LabelFor(model => model.EngineerName)
-  @Html.EditorFor(model => model.EngineerName)
+  @Html.Label("Name:")
+  @Html.EditorFor(model => model.EngineerName) <br />
+
+  @Html.Label("Assign to Machine:")
+  @Html.DropDownList("MachineId")
 
   <input type="submit" value="Save" />
 }

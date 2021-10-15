@@ -2,22 +2,20 @@
   Layout = "_Layout";
 }
 
-@using Microsoft.AspNetCore.Mvc.Rendering;
-
-@model Factory.Models.Engineer;
+@using Factory.Models;
 <h1></h1>
 
-@if (@Model.JoinEntities.Count == 0)
+@if (@Model.Count == 0)
 {
   <h3>Please add an Engineer!</h3>
 }
 else
 {
-  <h3>Current Engineer's and</h3>
+  <h3>Current Engineers:</h3>
 <ul>
-  @foreach(var join in @Model.JoinEntities)
+  @foreach(Engineer engineer in Model)
   {
-    <li>@Html.ActionLink($"{join.Engineer.EngineerName}", "Details", new { id = join.Engineer.EngineerId })</li>
+    <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", new { id = engineer.EngineerId })</li>
   }
 </ul>
 }
