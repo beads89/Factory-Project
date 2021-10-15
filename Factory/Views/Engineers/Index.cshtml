@@ -2,20 +2,23 @@
   Layout = "_Layout";
 }
 
-@using Factory.Models;
+@model Factory.Models.Engineer;
 <h1></h1>
 
-@if (@Model.Count == 0)
+@if (@Model.JoinEntities.Count == 0)
 {
   <h3>Please add an Engineer!</h3>
 }
 else
 {
-  <h3>Current Engineer's and assigned machinery</h3>
+  <h3>Current Engineers and assigned machinery</h3>
 <ul>
-  @foreach(Engineer engineer in Model)
+  @foreach(var join in Model.JoinEntities)
   {
-    <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", new { id = engineer.EngineerId })</li>
+      <li>@Html.ActionLink($"{join.engineer.EngineerName}", "Details", new { id = join.engineer.EngineerId })</li>
+    <ol>
+    <li>@Html.ActionLink($"{join.machine.MachineName}", "Details", new { id = join.machine.MachineId })</li>
+    </ol>
   }
 </ul>
 }
