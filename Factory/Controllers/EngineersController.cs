@@ -28,10 +28,14 @@ namespace Factory.Controllers
       return View();
     }
     [HttpPost]
-    public ActionResult Create(Engineer engineer)
+    public ActionResult Create(Engineer engineer, int MachineId)
     {
       _db.Engineers.Add(engineer);
       _db.SaveChanges();
+      if (MachineId != 0)
+      {
+        _db.EngineerMachine.Add(new EngineerMachine() { MachineId = MachineId, EngineerId = engineer.EngineerId });
+      }
       return RedirectToAction("Index");
     }
         public ActionResult Details(int id)
@@ -51,8 +55,12 @@ namespace Factory.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Engineer engineer)
+    public ActionResult Edit(Engineer engineer, int MachineId)
     {
+      if (MachineId != 0)
+      {
+        _db.EngineerMachine.Add(new EngineerMachine() { MachineId = MachineId, EngineerId = engineer.EngineerId });
+      }
       ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineDescription");
       _db.Entry(engineer).State = EntityState.Modified;
       _db.SaveChanges();

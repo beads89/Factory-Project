@@ -1,18 +1,18 @@
 @{
   Layout = "_Layout";
 }
-
+@using Microsoft.AspNetCore.Mvc.Rendering
 @model Factory.Models.Machine
 
 <h3>Add new Machine</h3>
 @using (Html.BeginForm())
 {
-  <p>@Html.Label("Description:")
+  <p>@Html.Label("Name:")
   @Html.TextBoxFor(model => model.MachineDescription, new {@Value = "Enter description", required = true})
   </p><br />
-  <p>@Html.Label("Assign to Machine(not required to create):")
+  @* <p>@Html.Label("Assign to Machine(not required to create):")
   @Html.CheckBox("EngineerId")
-  </p> <br />
+  </p> <br /> *@
 
   <input type="submit" value="Add Machine" class="btn btn-primary"/>
 }
