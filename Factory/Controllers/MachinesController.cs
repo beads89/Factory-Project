@@ -18,6 +18,7 @@ namespace Factory.Controllers
 
     public ActionResult Index()
     {
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName");
       return View(_db.Machines.ToList());
     }
 
